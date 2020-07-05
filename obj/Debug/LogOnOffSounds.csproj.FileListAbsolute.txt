@@ -1,0 +1,18 @@
+C:\Users\Богдан\source\repos\Tweaks\LogOnOffSounds\bin\Debug\LogOnOffSounds.exe
+C:\Users\Богдан\source\repos\Tweaks\LogOnOffSounds\bin\Debug\LogOnOffSounds.pdb
+C:\Users\Богдан\source\repos\Tweaks\LogOnOffSounds\obj\Debug\LogOnOffSounds.csprojAssemblyReference.cache
+C:\Users\Богдан\source\repos\Tweaks\LogOnOffSounds\obj\Debug\LogOnOffSounds.csproj.CoreCompileInputs.cache
+C:\Users\Богдан\source\repos\Tweaks\LogOnOffSounds\obj\Debug\LogOnOffSounds.exe
+C:\Users\Богдан\source\repos\Tweaks\LogOnOffSounds\obj\Debug\LogOnOffSounds.pdb
+C:\Users\Богдан\source\repos\Tweaks\LogOnOffSounds\obj\Debug\LogOnOffSounds.ProjectInstaller.resources
+C:\Users\Богдан\source\repos\Tweaks\LogOnOffSounds\obj\Debug\LogOnOffSounds.csproj.GenerateResource.cache
+D:\Documents\Visual Studio 2019\Solutions\Tweaks\LogOnOffSounds\bin\Debug\LogOnOffSounds.exe
+D:\Documents\Visual Studio 2019\Solutions\Tweaks\LogOnOffSounds\bin\Debug\LogOnOffSounds.pdb
+D:\Documents\Visual Studio 2019\Solutions\Tweaks\LogOnOffSounds\obj\Debug\LogOnOffSounds.csprojAssemblyReference.cache
+D:\Documents\Visual Studio 2019\Solutions\Tweaks\LogOnOffSounds\obj\Debug\LogOnOffSounds.ProjectInstaller.resources
+D:\Documents\Visual Studio 2019\Solutions\Tweaks\LogOnOffSounds\obj\Debug\LogOnOffSounds.csproj.GenerateResource.cache
+D:\Documents\Visual Studio 2019\Solutions\Tweaks\LogOnOffSounds\obj\Debug\LogOnOffSounds.csproj.CoreCompileInputs.cache
+D:\Documents\Visual Studio 2019\Solutions\Tweaks\LogOnOffSounds\obj\Debug\LogOnOffSounds.exe
+D:\Documents\Visual Studio 2019\Solutions\Tweaks\LogOnOffSounds\obj\Debug\LogOnOffSounds.pdb
+D:\Documents\Visual Studio 2019\Solutions\Tweaks\LogOnOffSounds\bin\Debug\LogOnOffSounds.exe.config
+D:\Documents\Visual Studio 2019\Solutions\Tweaks\LogOnOffSounds\obj\Debug\LogOnOffSounds.LogOnAndOffSounds.resources
