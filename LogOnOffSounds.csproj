@@ -37,7 +37,13 @@
   <PropertyGroup>
     <StartupObject>LogOnOffSounds.Program</StartupObject>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Cassia, Version=2.0.0.60, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Cassia.2.0.0.60\lib\2.0\Cassia.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
@@ -75,6 +81,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="app.manifest" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
