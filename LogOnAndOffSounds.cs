@@ -21,7 +21,8 @@ namespace LogOnOffSounds
 
         protected System.String
             LogOnFilePath = System.String.Empty,
-            LogOffFilePath = System.String.Empty;
+            LogOffFilePath = System.String.Empty,
+            UnlockFilePath = System.String.Empty;
 
 
         protected override void OnSessionChange(SessionChangeDescription changeDescription)
@@ -32,20 +33,9 @@ namespace LogOnOffSounds
             try
             {
                 System.String subkeyDir = System.String.Empty, defSoundPath = System.String.Empty;
-                switch (changeDescription.Reason)
+                Action readReg = new Action(() =>
                 {
-                    //case SessionChangeReason.SessionLogon:
-                    case SessionChangeReason.SessionUnlock:
-                        subkeyDir = @"AppEvents\Schemes\Apps\.Default\WindowsLogon\.Current";
-                        defSoundPath = "C:\\Windows\\Media\\Windows Logon.wav";
-                        break;
-                    case SessionChangeReason.SessionLogoff:
-                        subkeyDir = @"AppEvents\Schemes\Apps\.Default\WindowsLogoff\.Current";
-                        defSoundPath = "C:\\Windows\\Media\\Windows Logoff Sound.wav";
-                        break;
-                }
-                if(subkeyDir!=System.String.Empty)
-                {
+                    if (System.String.IsNullOrEmpty(subkeyDir)) return;
                     FileName = defSoundPath;
                     ITerminalServicesManager servicesManager = new TerminalServicesManager();
                     using (ITerminalServer server = servicesManager.GetLocalServer())
@@ -54,20 +44,47 @@ namespace LogOnOffSounds
                         if (securityIdentifier != null)
                         {
                             using (RegistryKey SecureKey = Registry.Users.OpenSubKey(securityIdentifier.ToString(), RegistryKeyPermissionCheck.ReadSubTree))
-                            //using (RegistryKey SecureKey = RegistryKey.OpenBaseKey(RegistryHive.Users, RegistryView.Default).OpenSubKey(securityIdentifier.ToString(), RegistryKeyPermissionCheck.ReadSubTree))
                             {
                                 RegistryKey regKey = SecureKey?.OpenSubKey(subkeyDir, RegistryKeyPermissionCheck.ReadSubTree);
                                 if (regKey != null)
                                 {
                                     FileName = (System.String)regKey.GetValue(null, defSoundPath);
                                     regKey?.Dispose();
-                                    
                                 }
                             }
                         }
                     }
+                });
+                Action uptSounds = new Action(() =>
+                {
+                    subkeyDir = @"AppEvents\Schemes\Apps\.Default\WindowsLogoff\.Current";
+                    defSoundPath = "C:\\Windows\\Media\\Windows Logoff Sound.wav";
+                    readReg();
+                    this.LogOffFilePath = FileName;
+                    subkeyDir = @"AppEvents\Schemes\Apps\.Default\WindowsUnlock\.Current";
+                    defSoundPath = "C:\\Windows\\Media\\Windows Unlock.wav";
+                    readReg();
+                    this.UnlockFilePath = FileName;
+                    subkeyDir = @"AppEvents\Schemes\Apps\.Default\WindowsLogon\.Current";
+                    defSoundPath = "C:\\Windows\\Media\\Windows Logon.wav";
+                    readReg();
+                    this.LogOnFilePath = FileName;
+                });
+                switch (changeDescription.Reason)
+                {
+                    //case SessionChangeReason.SessionLogon:
+                    case SessionChangeReason.SessionLogon:
+                        uptSounds();
+                        FileName = this.LogOnFilePath;
+                        break;
+                    case SessionChangeReason.SessionLogoff:
+                        FileName = this.LogOffFilePath;
+                        break;
+                    case SessionChangeReason.SessionUnlock:
+                        uptSounds();
+                        FileName = this.UnlockFilePath;
+                        break;
                 }
-
                 if (FileName != System.String.Empty)
                 {
                     using (System.Media.SoundPlayer soundPlayer = new System.Media.SoundPlayer(FileName))
@@ -75,18 +92,6 @@ namespace LogOnOffSounds
                 }
             }
             catch(Exception ex) { }
-        }
-
-        protected override void OnStart(string[] args) => SystemEvents.UserPreferenceChanged += SystemEvents_UserPreferenceChanged;
-
-        protected override void OnStop() => SystemEvents.UserPreferenceChanged += SystemEvents_UserPreferenceChanged;
-
-        private void SystemEvents_UserPreferenceChanged(object sender, UserPreferenceChangedEventArgs e)
-        {
-            Action action = new Action(() =>
-            { 
-
-            });
         }
     }
 }
