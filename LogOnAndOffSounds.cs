@@ -12,6 +12,9 @@ using Microsoft.Win32;
 using System.Runtime.InteropServices;
 using Cassia;
 using System.Security.Principal;
+using NAudio.Wave;
+using NAudio;
+using System.Threading;
 
 namespace LogOnOffSounds
 {
@@ -27,7 +30,6 @@ namespace LogOnOffSounds
 
         protected override void OnSessionChange(SessionChangeDescription changeDescription)
         {
-
             base.OnSessionChange(changeDescription);
             System.String FileName = System.String.Empty;
             try
@@ -87,11 +89,25 @@ namespace LogOnOffSounds
                 }
                 if (FileName != System.String.Empty)
                 {
-                    using (System.Media.SoundPlayer soundPlayer = new System.Media.SoundPlayer(FileName))
+                    /*using (System.Media.SoundPlayer soundPlayer = new System.Media.SoundPlayer(FileName))
+                    {
+                        soundPlayer.Load();
                         soundPlayer.Play();
+                    }*/
+                    using(WaveOutEvent output=new WaveOutEvent())
+                    using (AudioFileReader reader=new  AudioFileReader(FileName))
+                    {
+                        output.Init(reader);
+                        EventWaitHandle waitHandle = new EventWaitHandle(false, EventResetMode.ManualReset);
+                        output.PlaybackStopped += new EventHandler<StoppedEventArgs>((object sender, StoppedEventArgs args) => waitHandle.Set());
+                        output.Play();
+                        waitHandle.WaitOne();
+                    }
+                    GC.Collect();
+                    GC.WaitForPendingFinalizers();
                 }
             }
-            catch(Exception ex) { }
+            finally { }
         }
     }
 }

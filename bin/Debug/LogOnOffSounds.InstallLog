@@ -87,3 +87,12 @@ Affected parameters are:
    logtoconsole = 
    logfile = D:\Documents\Visual Studio 2019\Solutions\Tweaks\LogOnOffSounds\bin\Debug\LogOnOffSounds.InstallLog
    assemblypath = D:\Documents\Visual Studio 2019\Solutions\Tweaks\LogOnOffSounds\bin\Debug\LogOnOffSounds.exe
+Uninstalling assembly 'D:\Documents\Visual Studio 2019\Solutions\Tweaks\LogOnOffSounds\bin\Debug\LogOnOffSounds.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Documents\Visual Studio 2019\Solutions\Tweaks\LogOnOffSounds\bin\Debug\LogOnOffSounds.InstallLog
+   assemblypath = D:\Documents\Visual Studio 2019\Solutions\Tweaks\LogOnOffSounds\bin\Debug\LogOnOffSounds.exe
+Removing EventLog source LogOnAndOffSounds.
+Service LogOnAndOffSounds is being removed from the system...
+Service LogOnAndOffSounds was successfully removed from the system.
+Attempt to stop service LogOnAndOffSounds.

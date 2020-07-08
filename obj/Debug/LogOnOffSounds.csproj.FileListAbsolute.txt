@@ -19,3 +19,5 @@ D:\Documents\Visual Studio 2019\Solutions\Tweaks\LogOnOffSounds\obj\Debug\LogOnO
 D:\Documents\Visual Studio 2019\Solutions\Tweaks\LogOnOffSounds\bin\Debug\Cassia.dll
 D:\Documents\Visual Studio 2019\Solutions\Tweaks\LogOnOffSounds\bin\Debug\Cassia.xml
 D:\Documents\Visual Studio 2019\Solutions\Tweaks\LogOnOffSounds\obj\Debug\LogOnOffSounds.csproj.CopyComplete
+D:\Documents\Visual Studio 2019\Solutions\Tweaks\LogOnOffSounds\bin\Debug\NAudio.dll
+D:\Documents\Visual Studio 2019\Solutions\Tweaks\LogOnOffSounds\bin\Debug\NAudio.xml

@@ -1,0 +1,14 @@
+﻿
+Running a transacted installation.
+
+Beginning the Install phase of the installation.
+See the contents of the log file for the D:\Documents\Visual Studio 2019\Solutions\Tweaks\LogOnOffSounds\bin\Release\LogOnOffSounds.exe assembly's progress.
+The file is located at D:\Documents\Visual Studio 2019\Solutions\Tweaks\LogOnOffSounds\bin\Release\LogOnOffSounds.InstallLog.
+
+The Install phase completed successfully, and the Commit phase is beginning.
+See the contents of the log file for the D:\Documents\Visual Studio 2019\Solutions\Tweaks\LogOnOffSounds\bin\Release\LogOnOffSounds.exe assembly's progress.
+The file is located at D:\Documents\Visual Studio 2019\Solutions\Tweaks\LogOnOffSounds\bin\Release\LogOnOffSounds.InstallLog.
+
+The Commit phase completed successfully.
+
+The transacted install has completed.

@@ -1,0 +1,13 @@
+﻿Installing assembly 'D:\Documents\Visual Studio 2019\Solutions\Tweaks\LogOnOffSounds\bin\Release\LogOnOffSounds.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Documents\Visual Studio 2019\Solutions\Tweaks\LogOnOffSounds\bin\Release\LogOnOffSounds.InstallLog
+   assemblypath = D:\Documents\Visual Studio 2019\Solutions\Tweaks\LogOnOffSounds\bin\Release\LogOnOffSounds.exe
+Installing service LogOnAndOffSounds...
+Service LogOnAndOffSounds has been successfully installed.
+Creating EventLog source LogOnAndOffSounds in log Application...
+Committing assembly 'D:\Documents\Visual Studio 2019\Solutions\Tweaks\LogOnOffSounds\bin\Release\LogOnOffSounds.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Documents\Visual Studio 2019\Solutions\Tweaks\LogOnOffSounds\bin\Release\LogOnOffSounds.InstallLog
+   assemblypath = D:\Documents\Visual Studio 2019\Solutions\Tweaks\LogOnOffSounds\bin\Release\LogOnOffSounds.exe
