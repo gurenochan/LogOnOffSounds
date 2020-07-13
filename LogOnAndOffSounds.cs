@@ -107,7 +107,7 @@ namespace LogOnOffSounds
                     GC.WaitForPendingFinalizers();
                 }
             }
-            finally { }
+            catch (Exception ex) { }
         }
     }
 }
