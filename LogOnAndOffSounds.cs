@@ -26,7 +26,64 @@ namespace LogOnOffSounds
             LogOnFilePath = System.String.Empty,
             LogOffFilePath = System.String.Empty,
             UnlockFilePath = System.String.Empty;
+        protected int SessionId;
 
+        public System.String ReadReg(System.String subkeyDir, int sessionId)
+        {
+            System.String FileName = System.String.Empty;
+            try
+            {
+                if (System.String.IsNullOrEmpty(subkeyDir)) return FileName;
+                ITerminalServicesManager servicesManager = new TerminalServicesManager();
+                using (ITerminalServer server = servicesManager.GetLocalServer())
+                {
+                    SecurityIdentifier securityIdentifier = (SecurityIdentifier)server?.GetSessions().DefaultIfEmpty(null).FirstOrDefault(p => p.SessionId == sessionId)?.UserAccount.Translate(typeof(SecurityIdentifier));
+                    if (securityIdentifier != null)
+                    {
+                        using (RegistryKey SecureKey = Registry.Users.OpenSubKey(securityIdentifier.ToString(), RegistryKeyPermissionCheck.ReadSubTree))
+                        {
+                            RegistryKey regKey = SecureKey?.OpenSubKey(subkeyDir, RegistryKeyPermissionCheck.ReadSubTree);
+                            if (regKey != null)
+                            {
+                                FileName = (System.String)regKey.GetValue(null, System.String.Empty);
+                                regKey?.Dispose();
+                            }
+                        }
+                    }
+                }
+            }
+            catch { }
+            return FileName;
+        }
+
+        protected void PlaySound(System.String fileName)
+        {
+            try
+            {
+                if ((fileName ?? System.String.Empty) != System.String.Empty)
+                {
+                    /*using (System.Media.SoundPlayer soundPlayer = new System.Media.SoundPlayer(FileName))
+                    {
+                        soundPlayer.Load();
+                        soundPlayer.Play();
+                    }*/
+                    using (WaveOutEvent output = new WaveOutEvent())
+                    using (AudioFileReader reader = new AudioFileReader(fileName))
+                    {
+                        output.Init(reader);
+                        EventWaitHandle waitHandle = new EventWaitHandle(false, EventResetMode.ManualReset);
+                        output.PlaybackStopped += new EventHandler<StoppedEventArgs>((object sender, StoppedEventArgs args) => waitHandle.Set());
+                        output.Play();
+                        waitHandle.WaitOne();
+                    }
+                }
+            }
+            finally
+            {
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+            }
+        }
 
         protected override void OnSessionChange(SessionChangeDescription changeDescription)
         {
@@ -34,43 +91,12 @@ namespace LogOnOffSounds
             System.String FileName = System.String.Empty;
             try
             {
-                System.String subkeyDir = System.String.Empty, defSoundPath = System.String.Empty;
-                Action readReg = new Action(() =>
-                {
-                    if (System.String.IsNullOrEmpty(subkeyDir)) return;
-                    FileName = defSoundPath;
-                    ITerminalServicesManager servicesManager = new TerminalServicesManager();
-                    using (ITerminalServer server = servicesManager.GetLocalServer())
-                    {
-                        SecurityIdentifier securityIdentifier = (SecurityIdentifier)server?.GetSessions().DefaultIfEmpty(null).FirstOrDefault(p => p.SessionId == changeDescription.SessionId)?.UserAccount.Translate(typeof(SecurityIdentifier));
-                        if (securityIdentifier != null)
-                        {
-                            using (RegistryKey SecureKey = Registry.Users.OpenSubKey(securityIdentifier.ToString(), RegistryKeyPermissionCheck.ReadSubTree))
-                            {
-                                RegistryKey regKey = SecureKey?.OpenSubKey(subkeyDir, RegistryKeyPermissionCheck.ReadSubTree);
-                                if (regKey != null)
-                                {
-                                    FileName = (System.String)regKey.GetValue(null, defSoundPath);
-                                    regKey?.Dispose();
-                                }
-                            }
-                        }
-                    }
-                });
                 Action uptSounds = new Action(() =>
                 {
-                    subkeyDir = @"AppEvents\Schemes\Apps\.Default\WindowsLogoff\.Current";
-                    defSoundPath = "C:\\Windows\\Media\\Windows Logoff Sound.wav";
-                    readReg();
-                    this.LogOffFilePath = FileName;
-                    subkeyDir = @"AppEvents\Schemes\Apps\.Default\WindowsUnlock\.Current";
-                    defSoundPath = "C:\\Windows\\Media\\Windows Unlock.wav";
-                    readReg();
-                    this.UnlockFilePath = FileName;
-                    subkeyDir = @"AppEvents\Schemes\Apps\.Default\WindowsLogon\.Current";
-                    defSoundPath = "C:\\Windows\\Media\\Windows Logon.wav";
-                    readReg();
-                    this.LogOnFilePath = FileName;
+                    this.LogOffFilePath = this.ReadReg(@"AppEvents\Schemes\Apps\.Default\WindowsLogoff\.Current", changeDescription.SessionId);
+                    this.UnlockFilePath = this.ReadReg(@"AppEvents\Schemes\Apps\.Default\WindowsUnlock\.Current", changeDescription.SessionId);
+                    this.LogOnFilePath = this.ReadReg(@"AppEvents\Schemes\Apps\.Default\WindowsLogon\.Current", changeDescription.SessionId);
+                    this.SessionId = changeDescription.SessionId;
                 });
                 switch (changeDescription.Reason)
                 {
@@ -87,27 +113,15 @@ namespace LogOnOffSounds
                         FileName = this.UnlockFilePath;
                         break;
                 }
-                if (FileName != System.String.Empty)
-                {
-                    /*using (System.Media.SoundPlayer soundPlayer = new System.Media.SoundPlayer(FileName))
-                    {
-                        soundPlayer.Load();
-                        soundPlayer.Play();
-                    }*/
-                    using(WaveOutEvent output=new WaveOutEvent())
-                    using (AudioFileReader reader=new  AudioFileReader(FileName))
-                    {
-                        output.Init(reader);
-                        EventWaitHandle waitHandle = new EventWaitHandle(false, EventResetMode.ManualReset);
-                        output.PlaybackStopped += new EventHandler<StoppedEventArgs>((object sender, StoppedEventArgs args) => waitHandle.Set());
-                        output.Play();
-                        waitHandle.WaitOne();
-                    }
-                    GC.Collect();
-                    GC.WaitForPendingFinalizers();
-                }
+                this.PlaySound(FileName);
             }
-            catch (Exception ex) { }
+            catch { }
+        }
+
+        protected override void OnShutdown()
+        {
+            base.OnShutdown();
+            this.PlaySound(ReadReg(@"AppEvents\Schemes\Apps\.Default\SystemExit\.Current", this.SessionId));
         }
     }
 }
