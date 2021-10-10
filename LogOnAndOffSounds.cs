@@ -118,9 +118,9 @@ namespace LogOnOffSounds
             {
                 Action uptSounds = new Action(() =>
                 {
-                    WriteIfNotExists(@"AppEvents\EventLabels\WindowsLogoff", "ExcludeFromCPL", 1, changeDescription.SessionId);
-                    WriteIfNotExists(@"AppEvents\EventLabels\WindowsLogon", "ExcludeFromCPL", 1, changeDescription.SessionId);
-                    WriteIfNotExists(@"AppEvents\EventLabels\WindowsUnlock", "ExcludeFromCPL", 1, changeDescription.SessionId);
+                    WriteIfNotExists(@"AppEvents\EventLabels\WindowsLogoff", "ExcludeFromCPL", 0, changeDescription.SessionId);
+                    WriteIfNotExists(@"AppEvents\EventLabels\WindowsLogon", "ExcludeFromCPL", 0, changeDescription.SessionId);
+                    WriteIfNotExists(@"AppEvents\EventLabels\WindowsUnlock", "ExcludeFromCPL", 0, changeDescription.SessionId);
 
                     this.LogOffFilePath = this.ReadReg(@"AppEvents\Schemes\Apps\.Default\WindowsLogoff\.Current", changeDescription.SessionId);
                     this.UnlockFilePath = this.ReadReg(@"AppEvents\Schemes\Apps\.Default\WindowsUnlock\.Current", changeDescription.SessionId);
@@ -150,7 +150,7 @@ namespace LogOnOffSounds
         protected override void OnShutdown()
         {
             base.OnShutdown();
-            WriteIfNotExists(@"AppEvents\EventLabels\SystemExit", "ExcludeFromCPL", 1, this.SessionId);
+            WriteIfNotExists(@"AppEvents\EventLabels\SystemExit", "ExcludeFromCPL", 0, this.SessionId);
             this.PlaySound(ReadReg(@"AppEvents\Schemes\Apps\.Default\SystemExit\.Current", this.SessionId));
         }
     }
