@@ -96,3 +96,16 @@ Removing EventLog source LogOnAndOffSounds.
 Service LogOnAndOffSounds is being removed from the system...
 Service LogOnAndOffSounds was successfully removed from the system.
 Attempt to stop service LogOnAndOffSounds.
+Installing assembly 'D:\Programing\Projects\LogOnOffSounds\bin\Debug\LogOnOffSounds.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Programing\Projects\LogOnOffSounds\bin\Debug\LogOnOffSounds.InstallLog
+   assemblypath = D:\Programing\Projects\LogOnOffSounds\bin\Debug\LogOnOffSounds.exe
+Installing service LogOnAndOffSounds...
+Service LogOnAndOffSounds has been successfully installed.
+Creating EventLog source LogOnAndOffSounds in log Application...
+Committing assembly 'D:\Programing\Projects\LogOnOffSounds\bin\Debug\LogOnOffSounds.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Programing\Projects\LogOnOffSounds\bin\Debug\LogOnOffSounds.InstallLog
+   assemblypath = D:\Programing\Projects\LogOnOffSounds\bin\Debug\LogOnOffSounds.exe

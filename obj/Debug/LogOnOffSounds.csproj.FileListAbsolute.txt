@@ -21,3 +21,15 @@ D:\Documents\Visual Studio 2019\Solutions\Tweaks\LogOnOffSounds\bin\Debug\Cassia
 D:\Documents\Visual Studio 2019\Solutions\Tweaks\LogOnOffSounds\obj\Debug\LogOnOffSounds.csproj.CopyComplete
 D:\Documents\Visual Studio 2019\Solutions\Tweaks\LogOnOffSounds\bin\Debug\NAudio.dll
 D:\Documents\Visual Studio 2019\Solutions\Tweaks\LogOnOffSounds\bin\Debug\NAudio.xml
+D:\Programing\Projects\LogOnOffSounds\obj\Debug\LogOnOffSounds.csproj.AssemblyReference.cache
+D:\Programing\Projects\LogOnOffSounds\obj\Debug\LogOnOffSounds.LogOnAndOffSounds.resources
+D:\Programing\Projects\LogOnOffSounds\obj\Debug\LogOnOffSounds.ProjectInstaller.resources
+D:\Programing\Projects\LogOnOffSounds\obj\Debug\LogOnOffSounds.csproj.GenerateResource.cache
+D:\Programing\Projects\LogOnOffSounds\obj\Debug\LogOnOffSounds.csproj.CoreCompileInputs.cache
+D:\Programing\Projects\LogOnOffSounds\obj\Debug\LogOnOffSounds.exe
+D:\Programing\Projects\LogOnOffSounds\obj\Debug\LogOnOffSounds.pdb
+D:\Programing\Projects\LogOnOffSounds\bin\Debug\LogOnOffSounds.exe.config
+D:\Programing\Projects\LogOnOffSounds\bin\Debug\LogOnOffSounds.exe
+D:\Programing\Projects\LogOnOffSounds\bin\Debug\LogOnOffSounds.pdb
+D:\Programing\Projects\LogOnOffSounds\bin\Debug\Cassia.xml
+D:\Programing\Projects\LogOnOffSounds\bin\Debug\NAudio.xml
